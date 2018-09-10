@@ -17,7 +17,7 @@
 #include "Integrator_if.h"
 
 /*
- * Utilizes Simpson's method to integrate a function
+ * Utilizes Composite Simpson's method to integrate a function
  * between two points
  */
 class IntegratorDiogoImpl : public Integrator_if {
@@ -34,6 +34,7 @@ public:
 	double integrate(double min, double max, double (*f)(double, double, double, double, double), double p2, double p3, double p4, double p5);
 private:
 	double _precision = 1e-9;
+	double _n = 1000;
 };
 
 #endif /* INTEGRATORDIOGOIMPL1_H */
