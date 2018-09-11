@@ -15,11 +15,15 @@
 #define STATISTICS_IF_H
 
 #include <string>
+#include "Collector_if.h"
 
+/**
+ * Interface for statisct synthesis of a stochastic variable collected by a Collector_if. The statistics generated may be updated based only on the previous statistics and the single newest added value or they may be updated based on a datafile, depending on the Collector implementation.
+ */
 class Statistics_if {
-public: // get & set
-    virtual void setDataFilename(std::string _filename) = 0;
-    virtual std::string getDataFilename() const = 0;
+public:
+	virtual Collector_if* getCollector() = 0;
+	virtual void setCollector(Collector_if* collector) = 0;
 public:
 	virtual unsigned int numElements() = 0;
 	virtual double min() = 0;

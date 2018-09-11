@@ -25,6 +25,18 @@
 class Model;
 
 class ModelComponent : public ModelInfrastructure {
+/*
+	class ModelComponentDescription {
+		std::string COMPONENT_KIND = "";
+		std::string COMPONENT_AUTHOR = "";
+		std::string COMPONENT_VERSION = "";
+		std::string COMPONENT_DESCRIPTION = "";
+		std::string COMPONENT_IS_VISUAL = "";
+		std::string COMPONENT_IS_SOURCE = "";
+		std::string COMPONENT_IS_SINK = "";
+		std::string COMPONENT_DEPENDENCES = "";
+	}
+*/
 public:
 	ModelComponent(Model* model);
 	ModelComponent(const ModelComponent& orig);
@@ -32,16 +44,15 @@ public:
 public:
 	virtual std::string show();
 	List<ModelComponent*>* getNextComponents() const;
+public:
+	static void Execute(Entity* entity, ModelComponent* component);
+	static bool VerifySymbols(ModelComponent* component, std::string* errorMessage);
+	static std::list<std::string>* SaveInstance(ModelComponent* component);
 private:
 	List<ModelComponent*>* _nextComponents;
-public: // ...static...
-	void execute(Entity* entity, ModelComponent* component);
-	void readComponent(std::list<std::string> words); // return ModelComponent* ?
-	std::list<std::string> writeComponent(ModelComponent* component);
-	bool verifySymbols(ModelComponent* component, std::string* errorMessage);
 protected:
 	virtual void _execute(Entity* entity) = 0;
-	//virtual void _read(std::string text) = 0;
+
 protected:
 	Model* _model;
 };

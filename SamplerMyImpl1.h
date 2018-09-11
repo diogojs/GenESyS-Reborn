@@ -19,7 +19,8 @@
 class SamplerMyImpl1 : public Sampler_if {
 public:
 
-	struct MyRNG_Parameters : public RNG_Parameters {
+	class MyRNG_Parameters : public RNG_Parameters {
+	public:
 		unsigned int seed;
 		unsigned int module;
 		unsigned int multiplier;
@@ -41,12 +42,10 @@ public: // probability distributions
 	double sampleTriangular(double min, double mode, double max);
 	double sampleDiscrete(double value, double acumProb, ...);
 public:
-	void setRNGparameters(RNG_Parameters param);
-	RNG_Parameters getRNGparameters() const;
+	void setRNGparameters(RNG_Parameters* param);
+	RNG_Parameters* getRNGparameters() const;
 private:
-	unsigned int seed;
-	unsigned int module;
-	unsigned int multiplier;
+	MyRNG_Parameters* _param = new MyRNG_Parameters();
 
 };
 

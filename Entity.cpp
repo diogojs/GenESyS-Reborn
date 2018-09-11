@@ -14,8 +14,8 @@
 #include <typeinfo>
 #include "Entity.h"
 
-Entity::Entity() : ModelInfrastructure(typeid (Entity).name()) {
-	_name = "Entity " + Util::_S_generateNewIdOfType("Entity");
+Entity::Entity() : ModelInfrastructure(Util::TypeOf<Entity>()) {
+	_name = "Entity " + Util::GenerateNewIdOfType<Entity>();
 	// 1:n
 	_attributeValues = new std::map<std::string, AttributeValue*>();
 	// create default attributes
@@ -44,5 +44,18 @@ std::string Entity::getEntityTypeName() const {
 }
 
 std::string Entity::show() {
-	return ModelInfrastructure::show()+",entityTypeName="+this->_entityTypeName;
+	return ModelInfrastructure::show() +
+			",entityTypeName=" + this->_entityTypeName; //+ ",attributeValues="+std::to_string(this->_attributeValues);
+}
+
+void Entity::_loadInstance(std::list<std::string> words) {
+}
+
+std::list<std::string>* Entity::_saveInstance() {
+	std::list<std::string>* words = new std::list<std::string>();
+	return words;
+}
+
+bool Entity::_verifySymbols(std::string* errorMessage) {
+	//this->_
 }

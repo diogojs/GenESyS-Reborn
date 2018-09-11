@@ -18,7 +18,10 @@
 #include <limits>
 #include "SourceModelComponent.h"
 
-class Create: public SourceModelComponent {
+/*!
+ * Create is the most basic component to include the first entities into the model, and therefore is a source component (derived from SourceModelComponent)
+ */
+class Create : public SourceModelComponent {
 public:
 	Create(Model* model);
 	Create(const Create& orig);
@@ -27,6 +30,9 @@ public:
 	virtual std::string show();
 protected:
 	virtual void _execute(Entity* entity);
+	virtual void _loadInstance(std::list<std::string> words);
+	virtual std::list<std::string>* _saveInstance();
+	virtual bool _verifySymbols(std::string* errorMessage);
 };
 
 #endif /* CREATE_H */

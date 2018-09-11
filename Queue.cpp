@@ -13,7 +13,7 @@
 
 #include "Queue.h"
 
-Queue::Queue() : ModelInfrastructure(typeid (this).name()) {
+Queue::Queue() : ModelInfrastructure(Util::TypeOf<Queue>()) {
 }
 
 Queue::Queue(const Queue& orig) : ModelInfrastructure(orig) {
@@ -23,7 +23,48 @@ Queue::~Queue() {
 }
 
 std::string Queue::show() {
-	return ModelInfrastructure::show();
+	return ModelInfrastructure::show()+
+			",waiting="+this->_list->show();
+}
+
+void Queue::insertElement(Waiting* element) {
+	_list->insert(element);
+	this->_cstatNumberInQueue->getCollector()->addValue(_list->size());
+}
+	
+void Queue::removeElement(Waiting* element, double tnow) {
+	_list->remove(element);
+	this->_cstatNumberInQueue->getCollector()->addValue(_list->size());
+	double timeInQueue = tnow - element->getTimeStartedWaiting();
+	this->_cstatTimeInQueue->getCollector()->addValue(timeInQueue);
 }
 
 
+unsigned int Queue::size() {
+	return _list->size();
+}
+
+Waiting* Queue::first() {
+	return _list->first();
+}
+
+		
+		
+//List<Waiting*>* Queue::getList() const {
+//	return _list;
+//}
+
+
+
+void Queue::_loadInstance(std::list<std::string> words) {
+
+}
+
+std::list<std::string>* Queue::_saveInstance() {
+	std::list<std::string>* words = new std::list<std::string>();
+	return words;
+}
+
+bool Queue::_verifySymbols(std::string* errorMessage) {
+
+}

@@ -53,6 +53,7 @@ public:	// improved (easier) methods
 	T first();
 	T last();
 	T previous();
+	T actual(); // get current element on the list (the last used)
     void setSortFunc(CompFunct _sortFunc);
 private:
 	//std::map<Util::identitifcation, T>* _map;
@@ -93,7 +94,7 @@ std::string List<T>::show() {
 	for (typename std::list<T>::iterator it = _list->begin(); it != _list->end(); it++, i++) {
 		text += "[" + std::to_string(i) + "]=(" + (*it)->show() + "),";
 	}
-	text += "};";
+	text += "}";
 	return text;
 }
 
@@ -171,6 +172,13 @@ T List<T>::previous() {
 	_it--;
 	return (*_it);
 }
+
+template <typename T>
+T List<T>::actual() {
+	/* TODO: To implement. Must actualize _it on other methods when other elements are accessed */
+	return (*_it);
+}
+
 
 template <typename T>
 void List<T>::setSortFunc(CompFunct _sortFunc) {

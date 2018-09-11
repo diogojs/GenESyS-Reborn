@@ -23,10 +23,12 @@
 
 // Tools and Utils
 #include "Collector_if.h"
+#include "CollectorDatafile_if.h"
 #include "Statistics_if.h"
 #include "Integrator_if.h"
 #include "HypothesisTester_if.h"
 #include "ProbDistrib.h"
+#include "Sampler_if.h"
 
 // Model Components
 #include "Create.h"
@@ -34,6 +36,7 @@
 #include "Dispose.h"
 #include "Seize.h"
 #include "Release.h"
+#include "Assign.h"
 
 
 using namespace std;
@@ -69,16 +72,20 @@ void buildSimpleCreateDelayDisposeModel(Model* model) {
 	delay1->getNextComponents()->insert(dispose1);
 }
 
-void buildSimpleCreateSeizeDelayReleaseDisposeModel(Model* model) {
+void buildModelWithAllImplementedComponents(Model* model) {
 	// traces handle simulation events to output them
 	model->addTraceListener(&traceHandler);
 	model->addTraceReportListener(&traceHandler);
 	model->addTraceSimulationListener(&traceSimulationHandler);
-	// create and insert model components to the model
 
+	// create and insert model components to the model
 	Create* create1 = new Create(model);
 	create1->setTimeBetweenCreationsExpression("1.5");
 	create1->setTimeUnit(Util::TimeUnit::TU_minute);
+	
+	Assign* assign1 = new Assign(model);
+	assign1->setDestination("Variable 1");
+	assign1->setExpression("Norm(20,5) + Unif(-5,5)");
 
 	Seize* seize1 = new Seize(model);
 	seize1->setResourceName("Máquina 1");
@@ -87,18 +94,23 @@ void buildSimpleCreateSeizeDelayReleaseDisposeModel(Model* model) {
 	delay1->setDelayExpression("30");
 
 	Release* release1 = new Release(model);
+	release1->setResourceName("Máquina 1");
+	release1->setQueueName(seize1->getQueueName());
 
 	Dispose* dispose1 = new Dispose(model);
 
+	// add the components to the model
 	List<ModelComponent*>* components = model->getComponents();
 	components->insert(create1);
+	components->insert(assign1);
 	components->insert(seize1);
 	components->insert(delay1);
 	components->insert(release1);
 	components->insert(dispose1);
-	// connect model components to create a "workflow"
-	// should always start from a SourceModelComponent and end at a SinkModelComponent (it will be checked)
-	create1->getNextComponents()->insert(seize1);
+	
+	// connect model components to create a "workflow" -- should always start from a SourceModelComponent and end at a SinkModelComponent (it will be checked)
+	create1->getNextComponents()->insert(assign1);
+	assign1->getNextComponents()->insert(seize1);
 	seize1->getNextComponents()->insert(delay1);
 	delay1->getNextComponents()->insert(release1);
 	release1->getNextComponents()->insert(dispose1);
@@ -107,7 +119,7 @@ void buildSimpleCreateSeizeDelayReleaseDisposeModel(Model* model) {
 void buildModel(Model* model) {
 	// change next command to build different models
 	//buildSimpleCreateDelayDisposeModel(model);
-	buildSimpleCreateSeizeDelayReleaseDisposeModel(model);
+	buildModelWithAllImplementedComponents(model);
 }
 
 void buildSimulationSystem() {
@@ -115,7 +127,8 @@ void buildSimulationSystem() {
 	Model* model = new Model(simulator);
 	buildModel(model);
 	simulator->getModels()->insert(model);
-	if (model->check()) {
+	if (model->checkModel()) {
+		model->saveModel("./genesysmodel.txt");
 		model->startSimulation();
 		model->showReports();
 	}
@@ -124,8 +137,14 @@ void buildSimulationSystem() {
 void testStudentSoftwareDevelopments() {
 	Simulator* simulator = new Simulator();
 	Sampler_if* mmc = simulator->getSampler(); // Sampler is the new MMC
-	Collector_if* collector = new Traits<Collector_if>::Implementation();
+	CollectorDatafile_if* collector = new Traits<Collector_if>::Implementation();
 	collector->setDataFilename("./datafile.txt");
+	// just to show how to change MMC parameters
+	Traits<Sampler_if>::Parameters*  parameters = (Traits<Sampler_if>::Parameters*) mmc->getRNGparameters(); 
+	parameters->module = 2147483648;
+	parameters->multiplier = 1103515245;
+	parameters->seed = 1234;
+	mmc->setRNGparameters(parameters);
 
 	// generate a datafile with a thousand values that should be normal distributed == NORM(5000,350)
 	double value;
@@ -136,7 +155,7 @@ void testStudentSoftwareDevelopments() {
 
 	// generate statistics about that datafile 
 	Statistics_if* statistics = new Traits<Statistics_if>::Implementation();
-	statistics->setDataFilename(collector->getDataFilename());
+	statistics->setCollector(collector); //setDataFilename(collector->getDataFilename());
 	double statVal;
 	statVal = statistics->numElements();
 	statVal = statistics->average();
@@ -191,8 +210,15 @@ void testStudentSoftwareDevelopments() {
  * 
  */
 int main(int argc, char** argv) {
-	//buildSimulationSystem();
-	testStudentSoftwareDevelopments();
+	// uncomment bellow to execute a simulation
+	buildSimulationSystem();
+	
+	//command shell
+	//build_command_shell();
+	
+	// uncomment bellow to test Software Development (DS) implementations
+	//testStudentSoftwareDevelopments();
+	
 	return 0;
 }
 

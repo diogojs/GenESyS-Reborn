@@ -24,27 +24,36 @@
 #include "Statistics_if.h"
 #include "Integrator_if.h"
 #include "HypothesisTester_if.h"
+#include "ModelPersistence_if.h"
 
 // possible implementations
 #include "CollectorMyImpl1.h"
+#include "CollectorDatafileMyImpl1.h"
 #include "SamplerMyImpl1.h"
 #include "FitterMyImpl1.h"
 #include "ModelCheckerMyImpl1.h"
 #include "ParserMyImpl1.h"
-#include "StatisticsMyImpl1.h"
 #include "IntegratorMyImpl1.h"
 #include "HypothesisTesterMyImpl1.h"
+#include "ModelPersistenceMyImpl1.h"
+#include "StatisticsMyImpl1.h"
 
 template <typename T>
 struct Traits {
 	static const bool debugged = true;
+	static const Util::TraceLevel traceLevel = Util::TraceLevel::TL_mostDetailed; 
 };
 
 template <> struct Traits<Model> {
 };
 
+template <> struct Traits<ModelComponent> {
+	typedef CollectorMyImpl1 CollectorImplementation;
+};
+
 template <> struct Traits<Sampler_if> {
 	typedef SamplerMyImpl1 Implementation;
+	typedef SamplerMyImpl1::MyRNG_Parameters Parameters;
 };
 
 template <> struct Traits<Fitter_if> {
@@ -52,7 +61,8 @@ template <> struct Traits<Fitter_if> {
 };
 
 template <> struct Traits<Collector_if> {
-	typedef CollectorMyImpl1 Implementation;
+	typedef CollectorDatafileMyImpl1 Implementation;
+	typedef CollectorMyImpl1 ModelImplementation; //TEMP
 };
 
 template <> struct Traits<ModelChecker_if> {
@@ -73,6 +83,10 @@ template <> struct Traits<Integrator_if> {
 
 template <> struct Traits<HypothesisTester_if> {
 	typedef HypothesisTesterMyImpl1 Implementation;
+};
+
+template <> struct Traits<ModelPersistence_if> {
+	typedef ModelPersistenceMyImpl1 Implementation;
 };
 
 #endif /* TRAITS_H */

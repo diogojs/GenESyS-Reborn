@@ -15,6 +15,8 @@
                    projectFiles="true">
     </logicalFolder>
     <logicalFolder name="f2" displayName="Components" projectFiles="true">
+      <itemPath>Assign.cpp</itemPath>
+      <itemPath>Assign.h</itemPath>
       <itemPath>Create.cpp</itemPath>
       <itemPath>Create.h</itemPath>
       <itemPath>Delay.cpp</itemPath>
@@ -26,15 +28,18 @@
       <itemPath>Seize.cpp</itemPath>
       <itemPath>Seize.h</itemPath>
     </logicalFolder>
-    <logicalFolder name="f9"
-                   displayName="Configuration"
-                   projectFiles="true"
-                   kind="ROOT">
+    <logicalFolder name="f9" displayName="Configuration" projectFiles="true">
       <itemPath>Traits.h</itemPath>
     </logicalFolder>
     <logicalFolder name="f4" displayName="Infrastructure" projectFiles="true">
-      <itemPath>AttributeValue.cpp</itemPath>
-      <itemPath>AttributeValue.h</itemPath>
+      <logicalFolder name="f1" displayName="Element" projectFiles="true">
+        <itemPath>AttributeValue.cpp</itemPath>
+        <itemPath>AttributeValue.h</itemPath>
+        <itemPath>Waiting.cpp</itemPath>
+        <itemPath>Waiting.h</itemPath>
+        <itemPath>WaitingResource.cpp</itemPath>
+        <itemPath>WaitingResource.h</itemPath>
+      </logicalFolder>
       <itemPath>Entity.cpp</itemPath>
       <itemPath>Entity.h</itemPath>
       <itemPath>EntityType.cpp</itemPath>
@@ -43,6 +48,10 @@
       <itemPath>Queue.h</itemPath>
       <itemPath>Resource.cpp</itemPath>
       <itemPath>Resource.h</itemPath>
+      <itemPath>StatisticsCollector.cpp</itemPath>
+      <itemPath>StatisticsCollector.h</itemPath>
+      <itemPath>Variable.cpp</itemPath>
+      <itemPath>Variable.h</itemPath>
     </logicalFolder>
     <logicalFolder name="f1" displayName="Kernel" projectFiles="true">
       <itemPath>Event.cpp</itemPath>
@@ -56,6 +65,9 @@
       <itemPath>ModelComponent.h</itemPath>
       <itemPath>ModelInfrastructure.cpp</itemPath>
       <itemPath>ModelInfrastructure.h</itemPath>
+      <itemPath>ModelPersistenceMyImpl1.cpp</itemPath>
+      <itemPath>ModelPersistenceMyImpl1.h</itemPath>
+      <itemPath>ModelPersistence_if.h</itemPath>
       <itemPath>Plugin.cpp</itemPath>
       <itemPath>Plugin.h</itemPath>
       <itemPath>Simulator.cpp</itemPath>
@@ -77,6 +89,9 @@
     <logicalFolder name="f5" displayName="Shell" projectFiles="true">
     </logicalFolder>
     <logicalFolder name="f8" displayName="Tools" projectFiles="true">
+      <itemPath>CollectorDatafileMyImpl1.cpp</itemPath>
+      <itemPath>CollectorDatafileMyImpl1.h</itemPath>
+      <itemPath>CollectorDatafile_if.h</itemPath>
       <itemPath>CollectorMyImpl1.cpp</itemPath>
       <itemPath>CollectorMyImpl1.h</itemPath>
       <itemPath>Collector_if.h</itemPath>
@@ -130,9 +145,19 @@
           <commandLine>-std=c++11 -fpermissive</commandLine>
         </ccTool>
       </compileType>
+      <item path="Assign.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Assign.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="AttributeValue.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="AttributeValue.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="CollectorDatafileMyImpl1.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="CollectorDatafileMyImpl1.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="CollectorDatafile_if.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="CollectorMyImpl1.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -210,6 +235,12 @@
       </item>
       <item path="ModelInfrastructure.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="ModelPersistenceMyImpl1.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ModelPersistenceMyImpl1.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ModelPersistence_if.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ParserMyImpl1.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ParserMyImpl1.h" ex="false" tool="3" flavor2="0">
@@ -258,6 +289,10 @@
       </item>
       <item path="SourceModelComponent.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="StatisticsCollector.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="StatisticsCollector.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="StatisticsMyImpl1.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="StatisticsMyImpl1.h" ex="false" tool="3" flavor2="0">
@@ -269,6 +304,18 @@
       <item path="Util.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Util.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Variable.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Variable.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Waiting.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Waiting.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="WaitingResource.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="WaitingResource.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -293,9 +340,19 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="Assign.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Assign.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="AttributeValue.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="AttributeValue.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="CollectorDatafileMyImpl1.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="CollectorDatafileMyImpl1.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="CollectorDatafile_if.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="CollectorMyImpl1.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -373,6 +430,12 @@
       </item>
       <item path="ModelInfrastructure.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="ModelPersistenceMyImpl1.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ModelPersistenceMyImpl1.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ModelPersistence_if.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ParserMyImpl1.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ParserMyImpl1.h" ex="false" tool="3" flavor2="0">
@@ -421,6 +484,10 @@
       </item>
       <item path="SourceModelComponent.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="StatisticsCollector.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="StatisticsCollector.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="StatisticsMyImpl1.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="StatisticsMyImpl1.h" ex="false" tool="3" flavor2="0">
@@ -432,6 +499,18 @@
       <item path="Util.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Util.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Variable.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Variable.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Waiting.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Waiting.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="WaitingResource.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="WaitingResource.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
