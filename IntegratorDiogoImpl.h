@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /* 
  * File:   IntegratorDiogoImpl.h
  * Author: Diogo
@@ -17,8 +11,8 @@
 #include "Integrator_if.h"
 
 /*
- * Utilizes Composite Simpson's method to integrate a function
- * between two points
+ * Utilizes Composite Simpson's method to integrate
+ * a function (f) between two points (min, max).
  */
 class IntegratorDiogoImpl : public Integrator_if {
 public:
@@ -33,8 +27,8 @@ public:
 	double integrate(double min, double max, double (*f)(double, double, double, double),  double p2, double p3, double p4);
 	double integrate(double min, double max, double (*f)(double, double, double, double, double), double p2, double p3, double p4, double p5);
 private:
-	double _precision = 1e-9;
-	double _n = 1000;
+	double _precision = 1e-6;
+	double _n = 1e6;
 };
 
 #endif /* INTEGRATORDIOGOIMPL1_H */
