@@ -23,8 +23,8 @@ static double normal(double x, double mean, double stddev) {
 }
 
 double integrate(double min, double max, double (*f)(double, double, double), double p2, double p3) {
-    auto n = 1e9;
-    // calcular n com base no erro maximo permitido (_precision)
+    double _precision = 1e-6;
+    auto n = 1.0/_precision;
 
     double h = (max-min)/n;
     double x = min;
@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
 
     cout << "integrate(0, 100, &normal, 100, 10)\n";
 
-    double result = integrate(0, 100, &normal, 100, 10);
+    double result = integrate(0, 0.1, &normal, 0.1, 0.02);
     cout << "Resultado: " << result << endl;
 
     return 0;

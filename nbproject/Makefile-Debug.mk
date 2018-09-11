@@ -48,6 +48,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/FitterMyImpl1.o \
 	${OBJECTDIR}/HypothesisTesterMyImpl1.o \
 	${OBJECTDIR}/IntegratorMyImpl1.o \
+	${OBJECTDIR}/IntegratorDiogoImpl.o \
 	${OBJECTDIR}/LinkedBy.o \
 	${OBJECTDIR}/Listener.o \
 	${OBJECTDIR}/Model.o \
@@ -163,6 +164,11 @@ ${OBJECTDIR}/IntegratorMyImpl1.o: IntegratorMyImpl1.cpp nbproject/Makefile-${CND
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/IntegratorMyImpl1.o IntegratorMyImpl1.cpp
+
+${OBJECTDIR}/IntegratorDiogoImpl.o: IntegratorDiogoImpl.cpp nbproject/Makefile-${CND_CONF}.mk
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/IntegratorDiogoImpl.o IntegratorDiogoImpl.cpp
 
 ${OBJECTDIR}/LinkedBy.o: LinkedBy.cpp nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}

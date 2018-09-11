@@ -190,7 +190,7 @@ void testStudentSoftwareDevelopments() {
 
 	// calculate some integrals just for fun
 	Integrator_if* integrator = new Traits<Integrator_if>::Implementation();
-	value = integrator->integrate(0.0, 0.4, &ProbDistrib::uniform, 0.0, 0.1); // should return 0.4
+	value = integrator->integrate(0.0, 0.4, &ProbDistrib::uniform, 0.0, 1.0); // should return 0.4
 	value = integrator->integrate(0.0, 100, &ProbDistrib::normal, 100, 10); // should return 0.5
 	
 	// Test some hypothesis about the datafile
@@ -203,7 +203,6 @@ void testStudentSoftwareDevelopments() {
 	res = tester->testAverage(0.95, 5100, HypothesisTester_if::DIFFERENT);
 	res = tester->testVariance(0.95, 350*350, HypothesisTester_if::EQUAL);
 	res = tester->testVariance(0.95, 350*350, HypothesisTester_if::LESS_THAN);
-
 }
 
 /*
@@ -211,13 +210,13 @@ void testStudentSoftwareDevelopments() {
  */
 int main(int argc, char** argv) {
 	// uncomment bellow to execute a simulation
-	buildSimulationSystem();
+	// buildSimulationSystem();
 	
 	//command shell
 	//build_command_shell();
 	
 	// uncomment bellow to test Software Development (DS) implementations
-	//testStudentSoftwareDevelopments();
+	testStudentSoftwareDevelopments();
 	
 	return 0;
 }

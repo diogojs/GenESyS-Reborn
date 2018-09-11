@@ -34,6 +34,7 @@
 #include "ModelCheckerMyImpl1.h"
 #include "ParserMyImpl1.h"
 #include "IntegratorMyImpl1.h"
+#include "IntegratorDiogoImpl.h"
 #include "HypothesisTesterMyImpl1.h"
 #include "ModelPersistenceMyImpl1.h"
 #include "StatisticsMyImpl1.h"
@@ -78,7 +79,7 @@ template <> struct Traits<Statistics_if> {
 };
 
 template <> struct Traits<Integrator_if> {
-	typedef IntegratorMyImpl1 Implementation;
+	typedef IntegratorDiogoImpl Implementation;
 };
 
 template <> struct Traits<HypothesisTester_if> {
